@@ -5,4 +5,10 @@
 
     <dimen name="round_button_padding">12dp</dimen>
     <dimen name="normal_margin">8dp</dimen>
+
+    <!-- Drawer -->
+    <dimen name="drawer_size">240dp</dimen>
+    <dimen name="drawer_header_size">170dp</dimen>
+    <dimen name="drawer_header_padding">20dp</dimen>
+    <dimen name="drawer_header_title">18sp</dimen>
 </resources>

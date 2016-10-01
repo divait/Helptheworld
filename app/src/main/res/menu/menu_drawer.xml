@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/drawer_register"
+            android:title="@string/action_register"/>
+        <item
+            android:id="@+id/drawer_points"
+            android:title="@string/action_points"/>
+        <item
+            android:id="@+id/drawer_badges"
+            android:title="@string/action_badges"/>
+        <item
+            android:id="@+id/drawer_ranking"
+            android:title="@string/action_ranking"/>
+        <item
+            android:id="@+id/drawer_logout"
+            android:title="@string/action_logout"/>
+    </group>
+</menu>

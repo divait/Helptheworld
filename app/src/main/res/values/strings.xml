@@ -5,4 +5,11 @@
     <string name="dogs_button_description">Walk dogs</string>
     <string name="water_button_description">Save water</string>
     <string name="recycle_button_description">Recycle</string>
+
+    <!-- Drawer -->
+    <string name="action_register">Register</string>
+    <string name="action_points">Points</string>
+    <string name="action_badges">Badges</string>
+    <string name="action_ranking">Ranking</string>
+    <string name="action_logout">Logout</string>
 </resources>
