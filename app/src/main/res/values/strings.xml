@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Help the world</string>
+
+    <!-- Buttons descriptions -->
+    <string name="dogs_button_description">Walk dogs</string>
+    <string name="water_button_description">Save water</string>
+    <string name="recycle_button_description">Recycle</string>
 </resources>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
@@ -10,8 +11,59 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="co.waspp.divait.helptheworld.activities.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:layout_margin="@dimen/normal_margin"
+        android:baselineAligned="false"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/round_button_padding"
+                android:background="@drawable/round_button_green"
+                android:contentDescription="@string/recycle_button_description"
+                app:srcCompat="@mipmap/ic_launcher"
+                android:id="@+id/button_recycle" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/round_button_padding"
+                android:background="@drawable/round_button_purple"
+                android:contentDescription="@string/dogs_button_description"
+                app:srcCompat="@mipmap/ic_launcher"
+                android:id="@+id/button_dogs" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/round_button_padding"
+                android:background="@drawable/round_button_blue"
+                android:contentDescription="@string/water_button_description"
+                app:srcCompat="@mipmap/ic_launcher"
+                android:id="@+id/button_water" />
+        </LinearLayout>
+    </LinearLayout>
 </RelativeLayout>

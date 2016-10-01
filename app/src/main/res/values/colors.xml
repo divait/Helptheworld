@@ -3,4 +3,12 @@
     <color name="colorPrimary">#4f3fb5</color>
     <color name="colorPrimaryDark">#2b2684</color>
     <color name="colorAccent">#40ff7c</color>
+
+    <!-- Round Buttons -->
+    <color name="button_normal_purple">#a153dc</color>
+    <color name="button_pressed_purple">#b731ec</color>
+    <color name="button_normal_green">#65dc53</color>
+    <color name="button_pressed_green">#31ec44</color>
+    <color name="button_normal_blue">#5375dc</color>
+    <color name="button_pressed_blue">#3141ec</color>
 </resources>
