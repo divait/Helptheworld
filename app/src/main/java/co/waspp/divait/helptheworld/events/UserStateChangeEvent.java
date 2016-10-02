@@ -5,4 +5,9 @@ package co.waspp.divait.helptheworld.events;
  */
 
 public class UserStateChangeEvent {
+    private boolean isLooged;
+
+    public UserStateChangeEvent(boolean isLogged) {
+        this.isLooged = isLogged;
+    }
 }

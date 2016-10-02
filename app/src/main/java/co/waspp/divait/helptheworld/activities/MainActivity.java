@@ -16,10 +16,15 @@ import android.view.View;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.text.NumberFormat;
 import java.util.Locale;
 
 import co.waspp.divait.helptheworld.R;
+import co.waspp.divait.helptheworld.events.UserStateChangeEvent;
 
 public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
@@ -38,6 +43,18 @@ public class MainActivity extends AppCompatActivity {
         // Add navigation drawer behavior
         drawer = (DrawerLayout) findViewById(R.id.activity_main);
         initNavDrawer();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
     }
 
     @Override
@@ -150,5 +167,15 @@ public class MainActivity extends AppCompatActivity {
         // Set the Data in the Drawer
         View header = navView.getHeaderView(0);
         ((TextView) header.findViewById(R.id.text_name_drawer)).setText(getString(R.string.app_name));
+    }
+
+    /**
+     * Listen when user change the logged state.
+     *
+     * @param event
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onUserStateEvent(UserStateChangeEvent event) {
+
     }
 }
