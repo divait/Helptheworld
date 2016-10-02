@@ -12,4 +12,6 @@
     <string name="action_badges">Badges</string>
     <string name="action_ranking">Ranking</string>
     <string name="action_logout">Logout</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
 </resources>
