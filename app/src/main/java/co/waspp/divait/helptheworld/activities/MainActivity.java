@@ -1,10 +1,8 @@
 package co.waspp.divait.helptheworld.activities;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.v4.view.MenuItemCompat;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,20 +11,20 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.text.NumberFormat;
-import java.util.Locale;
-
 import co.waspp.divait.helptheworld.R;
 import co.waspp.divait.helptheworld.events.UserStateChangeEvent;
+import co.waspp.divait.helptheworld.fragments.MainGuestFragment;
+import co.waspp.divait.helptheworld.storage.UserPreferences;
 
 public class MainActivity extends AppCompatActivity {
+    static final String STATE_USER = "userState";
+
     private Toolbar toolbar;
     private DrawerLayout drawer;
 
@@ -43,6 +41,19 @@ public class MainActivity extends AppCompatActivity {
         // Add navigation drawer behavior
         drawer = (DrawerLayout) findViewById(R.id.activity_main);
         initNavDrawer();
+
+        // Check the container exists to add the fragment
+        if (findViewById(R.id.fragment_container) != null) {
+            //Restore for previous state
+            if (savedInstanceState != null) {
+                if(UserPreferences.getUserState(this) != savedInstanceState.getBoolean(STATE_USER)) {
+                    addFragment(false, chooseFragment());
+                }
+                return;
+            }
+            addFragment(true, chooseFragment());
+
+        }
     }
 
     @Override
@@ -55,6 +66,15 @@ public class MainActivity extends AppCompatActivity {
     public void onStop() {
         EventBus.getDefault().unregister(this);
         super.onStop();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        // Save the user's current game state
+        savedInstanceState.putBoolean(STATE_USER, UserPreferences.getUserState(this));
+
+        // Always call the superclass so it can save the view hierarchy state
+        super.onSaveInstanceState(savedInstanceState);
     }
 
     @Override
@@ -172,10 +192,47 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Listen when user change the logged state.
      *
-     * @param event
+     * @param event the event that arrive.
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onUserStateEvent(UserStateChangeEvent event) {
+
+    }
+
+    /**
+     * Add or Replace a fragment in the container of this activity
+     *
+     * @param add If you need to add or replace
+     * @param fragment the fragment to add
+     **/
+    private void addFragment(boolean add, Fragment fragment) {
+        if(add) {
+            // Add fragment
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.fragment_container, fragment)
+                    .commit();
+        } else {
+            // Replace fragment
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, fragment)
+                    .commit();
+        }
+    }
+
+    /**
+     * This method return the fragment corresponding is the user is logged or not.
+     *
+     * @return The corresponding fragment for the current state.
+     **/
+    private Fragment chooseFragment() {
+        // If user is Logged
+        if(UserPreferences.getUserState(this)) {
+            return new MainGuestFragment();
+        } else {
+            return new MainGuestFragment();
+        }
 
     }
 }
