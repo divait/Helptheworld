@@ -1,4 +1,4 @@
-package co.waspp.divait.helptheworld.fragments;
+package co.waspp.divait.helptheworld.main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +10,7 @@ import android.widget.Button;
 
 import co.waspp.divait.helptheworld.R;
 import co.waspp.divait.helptheworld.login.LoginActivity;
-import co.waspp.divait.helptheworld.activities.RegisterActivity;
+import co.waspp.divait.helptheworld.register.RegisterActivity;
 
 /**
  * Created by divait on 3/10/2016.

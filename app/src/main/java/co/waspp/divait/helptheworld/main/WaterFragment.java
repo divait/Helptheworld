@@ -1,4 +1,4 @@
-package co.waspp.divait.helptheworld.fragments;
+package co.waspp.divait.helptheworld.main;
 
 import android.support.v4.app.Fragment;
 

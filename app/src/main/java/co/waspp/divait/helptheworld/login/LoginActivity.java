@@ -11,8 +11,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import co.waspp.divait.helptheworld.R;
-import co.waspp.divait.helptheworld.activities.MainActivity;
-import co.waspp.divait.helptheworld.activities.RegisterActivity;
+import co.waspp.divait.helptheworld.main.MainActivity;
+import co.waspp.divait.helptheworld.register.RegisterActivity;
 
 /**
  * Created by divait on 3/10/2016.

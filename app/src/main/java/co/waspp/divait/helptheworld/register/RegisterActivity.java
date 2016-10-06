@@ -1,4 +1,4 @@
-package co.waspp.divait.helptheworld.activities;
+package co.waspp.divait.helptheworld.register;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
