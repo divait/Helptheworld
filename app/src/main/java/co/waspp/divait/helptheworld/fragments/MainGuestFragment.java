@@ -2,7 +2,6 @@ package co.waspp.divait.helptheworld.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import co.waspp.divait.helptheworld.R;
-import co.waspp.divait.helptheworld.activities.LoginActivity;
+import co.waspp.divait.helptheworld.login.LoginActivity;
 import co.waspp.divait.helptheworld.activities.RegisterActivity;
 
 /**

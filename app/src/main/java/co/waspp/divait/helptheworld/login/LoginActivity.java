@@ -1,4 +1,4 @@
-package co.waspp.divait.helptheworld.activities;
+package co.waspp.divait.helptheworld.login;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -11,6 +11,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import co.waspp.divait.helptheworld.R;
+import co.waspp.divait.helptheworld.activities.MainActivity;
+import co.waspp.divait.helptheworld.activities.RegisterActivity;
 
 /**
  * Created by divait on 3/10/2016.

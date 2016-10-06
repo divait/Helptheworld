@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "751631640180",
+    "firebase_url": "https://help-the-world.firebaseio.com",
+    "project_id": "help-the-world",
+    "storage_bucket": "help-the-world.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:751631640180:android:b7bb30e1d1a65943",
+        "android_client_info": {
+          "package_name": "co.waspp.divait.helptheworld"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "751631640180-l7kn7qreijmmi4d0s2hmd4cknr04mj2r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "co.waspp.divait.helptheworld",
+            "certificate_hash": "49C8C6F6FB566F831AA2E9D1AFC7EB7BB1000382"
+          }
+        },
+        {
+          "client_id": "751631640180-rf6se1738ubhp1b31flf0h5p1g1u1vmt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8F-MkbcxUH97JpUS4b-ZJ-00fIa30B2k"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "751631640180-rf6se1738ubhp1b31flf0h5p1g1u1vmt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
