@@ -3,11 +3,15 @@ package co.waspp.divait.helptheworld.login;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Patterns;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import co.waspp.divait.helptheworld.R;
@@ -19,7 +23,7 @@ import co.waspp.divait.helptheworld.R;
 public class LoginInteractor {
 
     private final Context context;
-    private FirebaseAuth firebaseAuth;
+    private FirebaseAuth fbAuth;
 
     interface LoginInteractorCallback {
 
@@ -41,7 +45,7 @@ public class LoginInteractor {
     public LoginInteractor(Context context, FirebaseAuth firebaseAuth) {
         this.context = context;
         if (firebaseAuth != null) {
-            this.firebaseAuth = firebaseAuth;
+            this.fbAuth = firebaseAuth;
         } else {
             throw new RuntimeException("La instancia de FirebaseAuth no puede ser null");
         }
@@ -119,6 +123,17 @@ public class LoginInteractor {
     }
 
     private void signInUser(String email, String password, final LoginInteractorCallback callback) {
+        fbAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
 
+                        if (!task.isSuccessful()) {
+                            callback.onAuthFailed(task.getException().getMessage());
+                        } else {
+                            callback.onAuthSuccess();
+                        }
+                    }
+                });
     }
 }
