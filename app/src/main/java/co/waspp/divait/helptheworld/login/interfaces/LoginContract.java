@@ -1,4 +1,4 @@
-package co.waspp.divait.helptheworld.login;
+package co.waspp.divait.helptheworld.login.interfaces;
 
 import co.waspp.divait.helptheworld.models.BasePresenter;
 import co.waspp.divait.helptheworld.models.BaseView;
@@ -21,13 +21,15 @@ public interface LoginContract {
 
         void showLoginError(String msg);
 
-        void showPushNotifications();
+        void showMainActivity();
 
         void showGooglePlayServicesDialog(int errorCode);
 
         void showGooglePlayServicesError();
 
         void showNetworkError();
+
+        void showSignUpActivity();
     }
 
     interface Presenter extends BasePresenter {

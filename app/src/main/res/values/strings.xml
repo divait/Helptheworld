@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">Help the world</string>
-
-    <!-- Buttons descriptions -->
-    <string name="dogs_button_description">Walk dogs</string>
-    <string name="water_button_description">Save water</string>
-    <string name="recycle_button_description">Recycle</string>
+    <string name="error_need_play_services">Do you need Google Play Services to use the app.</string>
+    <string name="error_no_internet">Network not available. Connect and try again.</string>
+    <string name="write_email">Escribe tu correo</string>
+    <string name="no_valid_email">Correo no válido</string>
+    <string name="write_password">Escribe tu contraseña</string>
 
     <!-- Drawer -->
     <string name="action_register">Register</string>
@@ -18,6 +18,21 @@
     <!-- Buttons -->
     <string name="action_login">Log In</string>
 
-    <!-- Unregistered texts -->
+    <!-- Main -->
+    <!-- Main Unregistered Texts -->
     <string name="main_unregister_text">¡Challenge your self to help the world!</string>
+
+    <!-- Main Buttons descriptions -->
+    <string name="dogs_button_description">Walk dogs</string>
+    <string name="water_button_description">Save water</string>
+    <string name="recycle_button_description">Recycle</string>
+
+    <!-- Login -->
+    <!-- Login Texts -->
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="action_sign_in_ime">Login</string>
+    <string name="action_sign_in">Login</string>
+    <string name="no_account_create">No account yet? Create one.</string>
+
 </resources>

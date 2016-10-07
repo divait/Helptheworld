@@ -1,5 +1,6 @@
 package co.waspp.divait.helptheworld.login;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +11,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.firebase.auth.FirebaseAuth;
+
 import co.waspp.divait.helptheworld.R;
+import co.waspp.divait.helptheworld.login.interfaces.LoginContract;
 import co.waspp.divait.helptheworld.main.MainActivity;
 import co.waspp.divait.helptheworld.register.RegisterActivity;
 
@@ -20,35 +25,54 @@ import co.waspp.divait.helptheworld.register.RegisterActivity;
  * The Activity of registration.
  */
 
-public class LoginActivity extends AppCompatActivity {
-    // TODO Replace all the text for strings
-    private static final int REQUEST_SIGNUP = 0x005;
+public class LoginActivity extends AppCompatActivity implements LoginFragment.LoginFragmentCallback {
+    private static final int REQUEST_GOOGLE_PLAY_SERVICES = 0x001;
 
-    private Button loginButton;
-    private TextView signUpText;
-    private EditText emailEdit;
-    private EditText passEdit;
+    private FirebaseAuth fbAuth;
+    private LoginContract.Presenter loginPresenter;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        getAllViews();
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                login();
-            }
-        });
+        LoginFragment loginFragment = (LoginFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.login_container);
+        if (loginFragment == null) {
+            loginFragment = LoginFragment.newInstance();
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.login_container, loginFragment)
+                    .commit();
+        }
 
-        signUpText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signup();
-            }
-        });
+        // Get Firebase Instance
+        fbAuth = FirebaseAuth.getInstance();
+
+        // Create interactor and presenter
+        LoginInteractor loginInteractor = new LoginInteractor(getApplicationContext(), fbAuth);
+        loginPresenter = new LoginPresenter(loginFragment, loginInteractor);
     }
+
+    @Override
+    public void onInvokeGooglePlayServices(int errorCode) {
+        showPlayServicesErrorDialog(errorCode);
+    }
+
+
+    void showPlayServicesErrorDialog(
+            final int errorCode) {
+        Dialog dialog = GoogleApiAvailability.getInstance()
+
+                .getErrorDialog(
+                        LoginActivity.this,
+                        errorCode,
+                        REQUEST_GOOGLE_PLAY_SERVICES);
+        dialog.show();
+    }
+
+    /*
+    // TODO Replace all the text for strings
+    private static final int REQUEST_SIGNUP = 0x005;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -61,26 +85,11 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void getAllViews() {
-        loginButton = (Button) findViewById(R.id.btn_login);
-        signUpText = (TextView) findViewById(R.id.link_signup);
-        emailEdit = (EditText) findViewById(R.id.input_email);
-        passEdit = (EditText) findViewById(R.id.input_password);
-    }
-
     private void login() {
         if (!validate()) {
             onLoginFailed();
             return;
         }
-
-        loginButton.setEnabled(false);
-
-        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
-                android.R.style.Theme_DeviceDefault_Dialog);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Authenticating...");
-        progressDialog.show();
 
         String email = emailEdit.getText().toString();
         String password = passEdit.getText().toString();
@@ -140,4 +149,5 @@ public class LoginActivity extends AppCompatActivity {
 
         return valid;
     }
+    */
 }
