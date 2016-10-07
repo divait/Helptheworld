@@ -124,16 +124,16 @@ public class LoginInteractor {
 
     private void signInUser(String email, String password, final LoginInteractorCallback callback) {
         fbAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
+            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
 
-                        if (!task.isSuccessful()) {
-                            callback.onAuthFailed(task.getException().getMessage());
-                        } else {
-                            callback.onAuthSuccess();
-                        }
+                    if (!task.isSuccessful()) {
+                        callback.onAuthFailed(task.getException().getMessage());
+                    } else {
+                        callback.onAuthSuccess();
                     }
-                });
+                }
+            });
     }
 }
