@@ -1,5 +1,6 @@
 package co.waspp.divait.helptheworld.login;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +19,8 @@ import android.widget.Toast;
 import co.waspp.divait.helptheworld.R;
 import co.waspp.divait.helptheworld.login.interfaces.LoginContract;
 import co.waspp.divait.helptheworld.main.MainActivity;
+import co.waspp.divait.helptheworld.register.RegisterActivity;
+import co.waspp.divait.helptheworld.register.RegisterFragment;
 
 /**
  * Created by divait on 6/10/2016.
@@ -28,7 +31,7 @@ import co.waspp.divait.helptheworld.main.MainActivity;
 
 public class LoginFragment extends Fragment implements LoginContract.View {
 
-    private LoginFragmentCallback callback;
+    private Callback callback;
 
     private TextInputEditText editEmail;
     private TextInputEditText editPassword;
@@ -39,7 +42,7 @@ public class LoginFragment extends Fragment implements LoginContract.View {
     private TextInputLayout errorEmail;
     private TextInputLayout errorPassword;
 
-    interface LoginFragmentCallback {
+    interface Callback {
         void onInvokeGooglePlayServices(int errorCode);
     }
 
@@ -49,18 +52,21 @@ public class LoginFragment extends Fragment implements LoginContract.View {
     }
 
     public static LoginFragment newInstance() {
+        Bundle args = new Bundle();
+
         LoginFragment fragment = new LoginFragment();
+        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof LoginFragmentCallback) {
-            callback = (LoginFragmentCallback) context;
+        if (context instanceof Callback) {
+            callback = (Callback) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + "You must implement PSCallback.");
+                    + "You must implement Callback.");
         }
     }
 
@@ -197,8 +203,18 @@ public class LoginFragment extends Fragment implements LoginContract.View {
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == LoginActivity.REQUEST_SIGNUP) {
+            if (resultCode == Activity.RESULT_OK) {
+                showMainActivity();
+            }
+        }
+    }
+
     public void showSignUpActivity() {
-        // startActivityForResult(new Intent(getActivity(), MainActivity.class));
+        startActivityForResult(new Intent(getActivity(), RegisterActivity.class), LoginActivity.REQUEST_SIGNUP);
     }
 
     private void attemptLogin() {
