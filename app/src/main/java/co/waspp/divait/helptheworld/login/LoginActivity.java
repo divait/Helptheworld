@@ -17,7 +17,7 @@ import co.waspp.divait.helptheworld.login.interfaces.LoginContract;
  * The Activity of registration.
  */
 
-public class LoginActivity extends AppCompatActivity implements LoginFragment.LoginFragmentCallback {
+public class LoginActivity extends AppCompatActivity implements LoginFragment.Callback {
     public static final int REQUEST_SIGNUP = 0x005;
 
     private static final int REQUEST_GOOGLE_PLAY_SERVICES = 0x001;

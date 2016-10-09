@@ -35,4 +35,11 @@
     <string name="action_sign_in">Login</string>
     <string name="no_account_create">No account yet? Create one.</string>
 
+    <!-- Register -->
+    <!-- Register Tet -->
+    <string name="hint_name">Name</string>
+    <string name="action_sign_up_ime">Signup</string>
+    <string name="action_sign_up">Signup</string>
+    <string name="already_member">Already a member? Login</string>
+
 </resources>

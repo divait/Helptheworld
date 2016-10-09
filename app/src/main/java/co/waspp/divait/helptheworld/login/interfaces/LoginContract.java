@@ -28,8 +28,6 @@ public interface LoginContract {
         void showGooglePlayServicesError();
 
         void showNetworkError();
-
-        void showSignUpActivity();
     }
 
     interface Presenter extends BasePresenter {
