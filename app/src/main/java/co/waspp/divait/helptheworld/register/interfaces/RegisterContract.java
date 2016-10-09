@@ -34,6 +34,6 @@ public class RegisterContract {
     }
 
     public interface Presenter extends BasePresenter {
-        void attemptRegister(String email, String password);
+        void attemptRegister(String name, String email, String password);
     }
 }

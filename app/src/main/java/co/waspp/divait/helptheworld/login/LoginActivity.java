@@ -11,6 +11,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import co.waspp.divait.helptheworld.R;
 import co.waspp.divait.helptheworld.login.interfaces.LoginContract;
 import co.waspp.divait.helptheworld.models.BaseFirebaseActivity;
+import co.waspp.divait.helptheworld.storage.UserPreferences;
 
 /**
  * Created by divait on 3/10/2016.
@@ -22,7 +23,7 @@ public class LoginActivity extends BaseFirebaseActivity implements LoginFragment
     private LoginContract.Presenter loginPresenter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
 
@@ -48,5 +49,10 @@ public class LoginActivity extends BaseFirebaseActivity implements LoginFragment
     @Override
     protected void onAuthStateChangedActivity(FirebaseAuth firebaseAuth) {
         // When something refer to the user change
+        if (firebaseAuth.getCurrentUser() != null) {
+            UserPreferences.login(getApplicationContext(), null, firebaseAuth.getCurrentUser().getEmail());
+        } else {
+            UserPreferences.logout(getApplicationContext());
+        }
     }
 }

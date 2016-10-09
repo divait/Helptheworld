@@ -24,7 +24,6 @@ import co.waspp.divait.helptheworld.register.RegisterActivity;
 import co.waspp.divait.helptheworld.storage.UserPreferences;
 
 public class MainActivity extends AppCompatActivity {
-    private static final int REQUEST_SIGNUP = 0x005;
     static final String STATE_USER = "userState";
 
     private Toolbar toolbar;
@@ -103,17 +102,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_SIGNUP) {
-            if (resultCode == RESULT_OK) {
-
-                // TODO: Implement successful signup logic here
-
-            }
-        }
-    }
-
     /**
      * Set the title of the ActionBar with the name of the Shop.
      **/
@@ -172,6 +160,10 @@ public class MainActivity extends AppCompatActivity {
     private boolean onDrawerItemSelected (int id) {
         switch (id) {
             case R.id.drawer_register:
+                drawer.closeDrawers();
+                signup();
+                return true;
+            case R.id.drawer_login:
                 drawer.closeDrawers();
                 signup();
                 return true;
@@ -253,6 +245,6 @@ public class MainActivity extends AppCompatActivity {
     private void signup() {
         // Start the Signup activity
         Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
-        startActivityForResult(intent, REQUEST_SIGNUP);
+        startActivity(intent);
     }
 }

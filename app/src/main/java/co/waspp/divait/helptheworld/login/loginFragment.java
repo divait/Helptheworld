@@ -9,6 +9,7 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,6 @@ import co.waspp.divait.helptheworld.R;
 import co.waspp.divait.helptheworld.login.interfaces.LoginContract;
 import co.waspp.divait.helptheworld.main.MainActivity;
 import co.waspp.divait.helptheworld.register.RegisterActivity;
-import co.waspp.divait.helptheworld.register.RegisterFragment;
 
 /**
  * Created by divait on 6/10/2016.
@@ -75,6 +75,7 @@ public class LoginFragment extends Fragment implements LoginContract.View {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             // Get Arguments if are some
+            Log.d("Data dev", "Have arguments");
         }
     }
 
@@ -193,8 +194,7 @@ public class LoginFragment extends Fragment implements LoginContract.View {
                 .show();
     }
 
-    @Override
-    public void setPresenter(LoginContract.Presenter presenter) {
+    public void setRegisterPresenter(LoginContract.Presenter presenter) {
         if (presenter != null) {
             loginPresenter = presenter;
         } else {
@@ -202,19 +202,8 @@ public class LoginFragment extends Fragment implements LoginContract.View {
         }
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == LoginActivity.REQUEST_SIGNUP) {
-            if (resultCode == Activity.RESULT_OK) {
-                showMainActivity();
-            }
-        }
-    }
-
     public void showSignUpActivity() {
-        startActivityForResult(new Intent(getActivity(), RegisterActivity.class), LoginActivity.REQUEST_SIGNUP);
+        startActivity(new Intent(getActivity(), RegisterActivity.class));
     }
 
     private void attemptLogin() {

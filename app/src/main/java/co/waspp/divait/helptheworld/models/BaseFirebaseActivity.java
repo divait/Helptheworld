@@ -2,14 +2,11 @@ package co.waspp.divait.helptheworld.models;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.firebase.auth.FirebaseAuth;
-
-import co.waspp.divait.helptheworld.login.LoginActivity;
 
 /**
  * Created by divait on 9/10/2016.
@@ -26,8 +23,8 @@ public abstract class BaseFirebaseActivity extends AppCompatActivity {
     protected abstract void onAuthStateChangedActivity(FirebaseAuth firebaseAuth);
 
     @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         // Get Firebase Instance
         fbAuth = FirebaseAuth.getInstance();

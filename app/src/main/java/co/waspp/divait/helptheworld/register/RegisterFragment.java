@@ -89,7 +89,7 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
         editName = (TextInputEditText) root.findViewById(R.id.input_name);
         editEmail = (TextInputEditText) root.findViewById(R.id.input_email);
         editPassword = (TextInputEditText) root.findViewById(R.id.input_password);
-        errorEmail = (TextInputLayout) root.findViewById(R.id.error_name);
+        errorName = (TextInputLayout) root.findViewById(R.id.error_name);
         errorEmail = (TextInputLayout) root.findViewById(R.id.error_email);
         errorPassword = (TextInputLayout) root.findViewById(R.id.error_pass);
 
@@ -228,6 +228,10 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
     }
 
     public void  attemptSignup() {
-
+        registerPresenter.attemptRegister(
+                editName.getText().toString(),
+                editEmail.getText().toString(),
+                editPassword.getText().toString()
+        );
     }
 }

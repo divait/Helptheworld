@@ -11,6 +11,7 @@
 
     <!-- Logo -->
     <ImageView android:src="@mipmap/ic_launcher"
+        android:contentDescription="@string/app_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
@@ -87,6 +88,7 @@
             android:layout_marginTop="@dimen/large_margin"
             android:layout_marginBottom="@dimen/large_margin"
             android:padding="@dimen/button_padding"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:text="@string/action_sign_up"/>
 
         <TextView android:id="@+id/link_login"

@@ -13,6 +13,7 @@ import co.waspp.divait.helptheworld.login.LoginFragment;
 import co.waspp.divait.helptheworld.login.interfaces.LoginContract;
 import co.waspp.divait.helptheworld.models.BaseFirebaseActivity;
 import co.waspp.divait.helptheworld.register.interfaces.RegisterContract;
+import co.waspp.divait.helptheworld.storage.UserPreferences;
 
 /**
  * Created by divait on 3/10/2016.
@@ -38,6 +39,8 @@ public class RegisterActivity extends BaseFirebaseActivity implements RegisterFr
         }
 
         // Create interactor and presenter
+        RegisterInteractor registerInteractor = new RegisterInteractor(getApplicationContext(), fbAuth);
+        registerPresenter = new RegisterPresenter(registerFragment, registerInteractor);
     }
 
     @Override
@@ -48,5 +51,10 @@ public class RegisterActivity extends BaseFirebaseActivity implements RegisterFr
     @Override
     protected void onAuthStateChangedActivity(FirebaseAuth firebaseAuth) {
         // When something refer to the user change
+        if (firebaseAuth.getCurrentUser() != null) {
+            UserPreferences.login(getApplicationContext(), null, firebaseAuth.getCurrentUser().getEmail());
+        } else {
+            UserPreferences.logout(getApplicationContext());
+        }
     }
 }

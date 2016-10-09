@@ -15,17 +15,20 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import co.waspp.divait.helptheworld.R;
+import co.waspp.divait.helptheworld.utils.Utils;
 
 /**
- * Created by divai on 6/10/2016.
+ * Created by divait on 6/10/2016.
+ *
+ * The interactor that manege the behavior of the login View.
  */
 
-public class LoginInteractor {
+class LoginInteractor {
 
     private final Context context;
     private FirebaseAuth fbAuth;
 
-    interface LoginInteractorCallback {
+    interface Callback {
 
         void onEmailError(String msg);
 
@@ -42,7 +45,7 @@ public class LoginInteractor {
         void onAuthSuccess();
     }
 
-    public LoginInteractor(Context context, FirebaseAuth firebaseAuth) {
+    LoginInteractor(Context context, FirebaseAuth firebaseAuth) {
         this.context = context;
         if (firebaseAuth != null) {
             this.fbAuth = firebaseAuth;
@@ -51,7 +54,7 @@ public class LoginInteractor {
         }
     }
 
-    public void login(String email, String password, final LoginInteractorCallback callback) {
+    void login(String email, String password, final Callback callback) {
         // Check Logic
         boolean cEmail = isValidEmail(email, callback);
         boolean cPass = isValidPassword(password, callback);
@@ -60,7 +63,7 @@ public class LoginInteractor {
         }
 
         // Check Network
-        if (!isNetworkAvailable()) {
+        if (!Utils.isNetworkAvailable(context)) {
             callback.onNetworkConnectFailed();
             return;
         }
@@ -75,17 +78,17 @@ public class LoginInteractor {
 
     }
 
-    private boolean isValidPassword(String password, LoginInteractorCallback callback) {
+    private boolean isValidPassword(String password, Callback callback) {
         boolean isValid = true;
         if (TextUtils.isEmpty(password)) {
-            callback.onPasswordError(context.getString(R.string.write_email));
+            callback.onPasswordError(context.getString(R.string.write_password));
             isValid = false;
         }
 
         return isValid;
     }
 
-    private boolean isValidEmail(String email, LoginInteractorCallback callback) {
+    private boolean isValidEmail(String email, Callback callback) {
         boolean isValid = true;
         if (TextUtils.isEmpty(email)) {
             callback.onEmailError(context.getString(R.string.write_email));
@@ -100,14 +103,7 @@ public class LoginInteractor {
         return isValid;
     }
 
-    private boolean isNetworkAvailable() {
-        ConnectivityManager connMgr =
-                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-        return (networkInfo != null && networkInfo.isConnected());
-    }
-
-    private boolean isGooglePlayServicesAvailable(LoginInteractorCallback callback) {
+    private boolean isGooglePlayServicesAvailable(Callback callback) {
         int statusCode = GoogleApiAvailability.getInstance()
                 .isGooglePlayServicesAvailable(context);
 
@@ -122,7 +118,7 @@ public class LoginInteractor {
         return true;
     }
 
-    private void signInUser(String email, String password, final LoginInteractorCallback callback) {
+    private void signInUser(String email, String password, final Callback callback) {
         fbAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override

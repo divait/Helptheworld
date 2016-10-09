@@ -5,6 +5,7 @@
     <string name="write_email">Escribe tu correo</string>
     <string name="no_valid_email">Correo no válido</string>
     <string name="write_password">Escribe tu contraseña</string>
+    <string name="write_name">Escribe tu nombre</string>
 
     <!-- Drawer -->
     <string name="action_register">Register</string>
@@ -39,7 +40,7 @@
     <!-- Register Tet -->
     <string name="hint_name">Name</string>
     <string name="action_sign_up_ime">Signup</string>
-    <string name="action_sign_up">Signup</string>
+    <string name="action_sign_up">Register</string>
     <string name="already_member">Already a member? Login</string>
 
 </resources>

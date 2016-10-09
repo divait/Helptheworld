@@ -5,6 +5,9 @@
             android:id="@+id/drawer_register"
             android:title="@string/action_register"/>
         <item
+            android:id="@+id/drawer_login"
+            android:title="@string/action_login"/>
+        <item
             android:id="@+id/drawer_points"
             android:title="@string/action_points"/>
         <item
@@ -15,6 +18,7 @@
             android:title="@string/action_ranking"/>
         <item
             android:id="@+id/drawer_logout"
-            android:title="@string/action_logout"/>
+            android:title="@string/action_logout"
+            android:visible="false"/>
     </group>
 </menu>

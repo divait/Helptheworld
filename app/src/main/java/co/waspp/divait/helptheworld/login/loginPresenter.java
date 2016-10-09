@@ -6,16 +6,18 @@ import co.waspp.divait.helptheworld.login.interfaces.LoginContract;
 
 /**
  * Created by divait on 6/10/2016.
+ *
+ * The presenter for the login activity
  */
 
-public class LoginPresenter implements LoginContract.Presenter, LoginInteractor.LoginInteractorCallback {
+class LoginPresenter implements LoginContract.Presenter, LoginInteractor.Callback {
 
     private final LoginContract.View loginView;
     private LoginInteractor loginInteractor;
 
-    public LoginPresenter (@NonNull LoginContract.View loginView, @NonNull LoginInteractor loginInteractor) {
+    LoginPresenter(@NonNull LoginContract.View loginView, @NonNull LoginInteractor loginInteractor) {
         this.loginView = loginView;
-        loginView.setPresenter(this);
+        loginView.setRegisterPresenter(this);
         this.loginInteractor = loginInteractor;
     }
 
