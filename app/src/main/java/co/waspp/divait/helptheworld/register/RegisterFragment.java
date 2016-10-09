@@ -1,19 +1,25 @@
 package co.waspp.divait.helptheworld.register;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import co.waspp.divait.helptheworld.R;
+import co.waspp.divait.helptheworld.login.LoginActivity;
+import co.waspp.divait.helptheworld.main.MainActivity;
 import co.waspp.divait.helptheworld.register.interfaces.RegisterContract;
 
 /**
@@ -22,7 +28,7 @@ import co.waspp.divait.helptheworld.register.interfaces.RegisterContract;
  * View manager of registration.
  */
 
-public class RegisterFragment extends Fragment {
+public class RegisterFragment extends Fragment implements RegisterContract.View {
     private RegisterFragment.Callback callback;
 
     private TextInputEditText editName;
@@ -40,7 +46,7 @@ public class RegisterFragment extends Fragment {
         void onInvokeGooglePlayServices(int errorCode);
     }
 
-    private RegisterContract.Presenter presenter;
+    private RegisterContract.Presenter registerPresenter;
 
     public RegisterFragment (){
     }
@@ -69,6 +75,7 @@ public class RegisterFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             // Get Arguments if are some
+            Log.d("Data dev", "Have arguments");
         }
     }
 
@@ -127,6 +134,100 @@ public class RegisterFragment extends Fragment {
             public void afterTextChanged(Editable s) {}
         });
 
+        btnSignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                attemptSignup();
+            }
+        });
+
+        linkLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showLoginActivity();
+            }
+        });
+
         return root;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        registerPresenter.start();
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        callback = null;
+    }
+
+    @Override
+    public void showProgress(boolean show) {
+        viewLoginForm.setVisibility(show ? View.GONE : View.VISIBLE);
+        viewLoginProgress.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public void setNameError(String error) {
+        errorName.setError(error);
+    }
+
+    @Override
+    public void setEmailError(String error) {
+        errorEmail.setError(error);
+    }
+
+    @Override
+    public void setPasswordError(String error) {
+        errorPassword.setError(error);
+    }
+
+    @Override
+    public void showRegisterError(String msg) {
+        Toast.makeText(getActivity(), msg, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showMainActivity() {
+        startActivity(new Intent(getActivity(), MainActivity.class));
+        getActivity().finish();
+    }
+
+    @Override
+    public void showGooglePlayServicesDialog(int errorCode) {
+        callback.onInvokeGooglePlayServices(errorCode);
+    }
+
+    @Override
+    public void showGooglePlayServicesError() {
+        Toast.makeText(getActivity(),
+                getString(R.string.error_need_play_services), Toast.LENGTH_LONG)
+                .show();
+    }
+
+    @Override
+    public void showNetworkError() {
+        Toast.makeText(getActivity(),
+                getString(R.string.error_no_internet), Toast.LENGTH_LONG)
+                .show();
+    }
+
+    public void setRegisterPresenter(RegisterContract.Presenter presenter) {
+        if (presenter != null) {
+            registerPresenter = presenter;
+        } else {
+            throw new RuntimeException("Presenter can't be null.");
+        }
+    }
+
+    public void showLoginActivity() {
+        startActivity(new Intent(getActivity(), LoginActivity.class));
+        getActivity().finish();
+    }
+
+    public void  attemptSignup() {
+
     }
 }

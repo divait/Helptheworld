@@ -12,7 +12,7 @@ import co.waspp.divait.helptheworld.models.BaseView;
 
 public class RegisterContract {
 
-    interface View extends BaseView<RegisterContract.Presenter> {
+    public interface View extends BaseView<RegisterContract.Presenter> {
 
         void showProgress(boolean show);
 

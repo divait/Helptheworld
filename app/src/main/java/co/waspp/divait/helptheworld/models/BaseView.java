@@ -7,5 +7,5 @@ package co.waspp.divait.helptheworld.models;
  */
 
 public interface BaseView<T> {
-    void setPresenter (T presenter);
+    void setRegisterPresenter(T registerPresenter);
 }
