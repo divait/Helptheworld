@@ -9,17 +9,24 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.List;
+
 import co.waspp.divait.helptheworld.R;
 import co.waspp.divait.helptheworld.events.UserStateChangeEvent;
+import co.waspp.divait.helptheworld.login.LoginActivity;
 import co.waspp.divait.helptheworld.register.RegisterActivity;
 import co.waspp.divait.helptheworld.storage.UserPreferences;
 
@@ -61,6 +68,24 @@ public class MainActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         EventBus.getDefault().register(this);
+
+        Class cl;
+        if(UserPreferences.getUserState(this)) {
+            cl = MainFragment.class;
+        } else {
+            cl = MainGuestFragment.class;
+        }
+
+        List<Fragment> fragments = getSupportFragmentManager().getFragments();
+        Fragment fragment = null;
+        for(Fragment fr : fragments) {
+            if (fr != null)
+                fragment = fr;
+        }
+
+        if(fragment != null && fragment.getClass() != cl)
+            addFragment(false, chooseFragment());
+        changeMenuLogin(UserPreferences.getUserState(getApplicationContext()));
     }
 
     @Override
@@ -165,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.drawer_login:
                 drawer.closeDrawers();
-                signup();
+                login();
                 return true;
             case R.id.drawer_points:
                 drawer.closeDrawers();
@@ -178,6 +203,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.drawer_logout:
                 drawer.closeDrawers();
+                logout();
                 return true;
             default:
                 return false;
@@ -199,10 +225,11 @@ public class MainActivity extends AppCompatActivity {
      * Listen when user change the logged state.
      *
      * @param event the event that arrive.
-     */
+     **/
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onUserStateEvent(UserStateChangeEvent event) {
-
+        addFragment(false, chooseFragment());
+        changeMenuLogin(event.isLooged());
     }
 
     /**
@@ -235,16 +262,55 @@ public class MainActivity extends AppCompatActivity {
     private Fragment chooseFragment() {
         // If user is Logged
         if(UserPreferences.getUserState(this)) {
-            return new MainGuestFragment();
+            return new MainFragment();
         } else {
             return new MainGuestFragment();
         }
 
     }
 
-    private void signup() {
+    private void changeMenuLogin(boolean isLogged) {
+        NavigationView navView = (NavigationView) findViewById(R.id.drawer);
+        Menu menu = navView.getMenu();
+
+        View header = navView.getHeaderView(0);
+
+        ImageView image = (ImageView) header.findViewById(R.id.header_image);
+
+        if(!isLogged) {
+            image.setVisibility(View.GONE);
+
+            menu.findItem(R.id.drawer_login).setVisible(true);
+            menu.findItem(R.id.drawer_register).setVisible(true);
+            menu.findItem(R.id.drawer_logout).setVisible(false);
+            menu.findItem(R.id.drawer_points).setVisible(false);
+            menu.findItem(R.id.drawer_badges).setVisible(false);
+        } else {
+            image.setVisibility(View.VISIBLE);
+            image.setImageResource(R.drawable.hombre);
+
+            menu.findItem(R.id.drawer_login).setVisible(false);
+            menu.findItem(R.id.drawer_register).setVisible(false);
+            menu.findItem(R.id.drawer_logout).setVisible(true);
+            menu.findItem(R.id.drawer_points).setVisible(true);
+            menu.findItem(R.id.drawer_badges).setVisible(true);
+        }
+    }
+
+    private void signup() { // TODO: just one line
         // Start the Signup activity
         Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
         startActivity(intent);
+    }
+
+    private void login() { // TODO: just one line
+        // Start the Signup activity
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(intent);
+    }
+
+    private void logout() {
+        FirebaseAuth.getInstance().signOut();
+        UserPreferences.logout(getApplicationContext());
     }
 }

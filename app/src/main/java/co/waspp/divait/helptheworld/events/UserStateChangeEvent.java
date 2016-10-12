@@ -10,4 +10,8 @@ public class UserStateChangeEvent {
     public UserStateChangeEvent(boolean isLogged) {
         this.isLooged = isLogged;
     }
+
+    public boolean isLooged() {
+        return isLooged;
+    }
 }

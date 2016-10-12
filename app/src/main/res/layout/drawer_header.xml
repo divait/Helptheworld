@@ -8,6 +8,7 @@
     android:paddingBottom="@dimen/drawer_header_padding" >
 
     <ImageView
+        android:id="@+id/header_image"
         android:src="@mipmap/ic_launcher"
         android:layout_width="wrap_content"
         android:contentDescription="@string/app_name"
