@@ -3,6 +3,7 @@
     <color name="colorPrimary">#6856dc</color>
     <color name="colorPrimaryDark">#2b2684</color>
     <color name="colorAccent">#40ff7c</color>
+    <color name="grey">#999999</color>
 
     <!-- Round Buttons -->
     <color name="button_normal_purple">#a153dc</color>

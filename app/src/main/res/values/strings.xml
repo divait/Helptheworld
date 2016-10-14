@@ -43,4 +43,23 @@
     <string name="action_sign_up">Register</string>
     <string name="already_member">Already a member? Login</string>
 
+    <!-- Recycle -->
+    <!-- Types -->
+    <string-array name="recycle_titles">
+        <item>Organic</item>
+        <item>Inorganic</item>
+        <item>Paper</item>
+    </string-array>
+
+    <string-array name="recycle_description">
+        <item>Products apply this category: Food, fruits, vegetables and flowers.</item>
+        <item>Products apply this category: Plastic, metal and glass.</item>
+        <item>Products apply this category: Paper, books, news paper, boxes and paperboard.</item>
+    </string-array>
+
+    <string name="demo_points">1200 points</string>
+    <string name="demo_g_badges">2 Badges</string>
+    <string name="demo_s_badges">4 Badges</string>
+    <string name="demo_b_badges">6 Badges</string>
+
 </resources>

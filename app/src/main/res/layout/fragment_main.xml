@@ -10,6 +10,16 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin" >
 
+    <TextView
+        android:text="@string/demo_points"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_points"
+        android:layout_margin="6dp"
+        android:gravity="center"
+        android:textSize="24sp"
+        android:layout_gravity="center"/>
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -43,7 +53,7 @@
                     app:srcCompat="@drawable/oro" />
 
                 <TextView
-                    android:text="2 Medallas"
+                    android:text="@string/demo_g_badges"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -69,7 +79,7 @@
                     android:id="@+id/imageView2" />
 
                 <TextView
-                    android:text="3 Medallas"
+                    android:text="@string/demo_s_badges"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -94,7 +104,7 @@
                     app:srcCompat="@drawable/bronce"/>
 
                 <TextView
-                    android:text="8 Medallas"
+                    android:text="@string/demo_b_badges"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView3"
@@ -132,7 +142,7 @@
                 android:padding="@dimen/button_padding"
                 android:background="@drawable/round_button_green"
                 android:contentDescription="@string/recycle_button_description"
-                app:srcCompat="@mipmap/ic_launcher"
+                app:srcCompat="@drawable/caneca"
                 android:id="@+id/button_recycle" />
         </LinearLayout>
 
@@ -147,7 +157,7 @@
                 android:padding="@dimen/button_padding"
                 android:background="@drawable/round_button_purple"
                 android:contentDescription="@string/dogs_button_description"
-                app:srcCompat="@mipmap/ic_launcher"
+                app:srcCompat="@drawable/perro"
                 android:id="@+id/button_dogs" />
         </LinearLayout>
 
@@ -162,7 +172,7 @@
                 android:padding="@dimen/button_padding"
                 android:background="@drawable/round_button_blue"
                 android:contentDescription="@string/water_button_description"
-                app:srcCompat="@mipmap/ic_launcher"
+                app:srcCompat="@drawable/agua"
                 android:id="@+id/button_water" />
         </LinearLayout>
     </LinearLayout>

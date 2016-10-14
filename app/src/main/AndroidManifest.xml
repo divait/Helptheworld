@@ -3,6 +3,7 @@
     package="co.waspp.divait.helptheworld">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
     <application
         android:allowBackup="true"
@@ -22,6 +23,13 @@
             android:launchMode="singleInstance"/>
         <activity android:name=".register.RegisterActivity"
             android:launchMode="singleInstance" />
+        <activity android:name=".recycle.RecyclerActivity"
+            android:launchMode="singleInstance" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDLoA_Ux-Y6Wwf4WMbCSA1wSmjlfw1By6I"/>
+
     </application>
 
 </manifest>

@@ -14,7 +14,7 @@ import com.google.firebase.auth.FirebaseAuth;
  * The base activity to use firebase auth.
  */
 
-public abstract class BaseFirebaseActivity extends AppCompatActivity {
+public abstract class BaseFirebaseActivity extends BaseBackActivity {
     private static final int REQUEST_GOOGLE_PLAY_SERVICES = 0x001;
 
     protected FirebaseAuth fbAuth;
